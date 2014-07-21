@@ -4,19 +4,17 @@
   "description": "Game of Life Kata",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha -R spec -G"
   },
   "repository": "",
   "author": "James R. Carr",
   "license": "BSD",
-  "dependencies":{
-    "charm":"0.1.0"
+  "dependencies": {
+    "charm": "0.1.0",
+    "lodash": "~2.4.1"
   },
-  "devDependencies":{
-    "should":"1.1.0",
-    "mocha":"1.3.2"
-  },
-  "scripts":{
-    "test":"./node_modules/mocha/bin/mocha -R spec -G"
-  }  
+  "devDependencies": {
+    "should": "1.1.0",
+    "mocha": "1.3.2"
+  }
 }

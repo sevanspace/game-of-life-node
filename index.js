@@ -1,15 +1,28 @@
+var _ = require('lodash');
+
 module.exports = {
 	createGame: function(initialGrid, renderer){
 		return new Game(initialGrid, renderer);
 	}
 }
 
+// takes an array of arrays of 0's and 1's
+// and a renderer to output a representation or data
 function Game(grid, renderer){
 	this.grid = grid;
-	if(!renderer){
-		renderer = {render:function(){}};
-	}
-	renderer.render(grid);
+
+	defaults = {
+		init: function(){},
+		render:function(){},
+		stop: function(){return false;},
+		getData: function(){}
+	};
+
+	_.extend(renderer, defaults);
+
+	renderer.init();
+
+//	renderer.render(grid);
 	
 	this.cycle = function(){
 		var dying = [], born = []
@@ -34,6 +47,14 @@ function Game(grid, renderer){
 			grid[coord[0]][coord[1]] = 1
 		})
 		renderer.render(grid);
+	}
+
+	this.stop = function() {
+		return renderer.stop();
+	}
+
+	this.data = function() {
+		return renderer.getData();
 	}
 
 	function getCell(coord){
