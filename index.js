@@ -11,18 +11,14 @@ module.exports = {
 function Game(grid, renderer){
 	this.grid = grid;
 
-	defaults = {
-		init: function(){},
-		render:function(){},
-		stop: function(){return false;},
-		getData: function(){}
-	};
-
-	_.extend(renderer, defaults);
+	renderer.init = renderer.init || function(){};
+	renderer.render = renderer.render || function(){};
+	renderer.stop = renderer.stop || function(){return false;};
+	renderer.getData = renderer.getData || function(){};
 
 	renderer.init();
 
-//	renderer.render(grid);
+	renderer.render(grid);
 	
 	this.cycle = function(){
 		var dying = [], born = []
@@ -37,7 +33,7 @@ function Game(grid, renderer){
 				} else if(sum == 3 && cell ==0){
 					born.push([rowIndex, cellIndex])
 				}
-					
+
 			});
 		});
 		dying.forEach(function(coord) {
